@@ -1,0 +1,34 @@
+DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS user_role;
+
+
+CREATE TABLE roles (
+  roleid INT AUTO_INCREMENT  PRIMARY KEY,
+  role VARCHAR(250) NOT NULL
+);
+
+CREATE TABLE users (
+  userid INT AUTO_INCREMENT  PRIMARY KEY,
+  email VARCHAR(250) NOT NULL,
+  password VARCHAR(250) NOT NULL,
+  name VARCHAR(250) NOT NULL,
+  lastname VARCHAR(250),
+  address VARCHAR(250) ,
+  mobileno VARCHAR(250) DEFAULT NULL,
+  active INT DEFAULT 0
+);
+
+CREATE TABLE user_role (
+ id INT AUTO_INCREMENT  PRIMARY KEY,
+ userid INT NOT NULL,
+ roleid INT NOT NULL
+);
+
+ALTER TABLE user_role
+ADD FOREIGN KEY (userid) 
+REFERENCES users(userid);
+
+ALTER TABLE user_role
+ADD FOREIGN KEY (roleid) 
+REFERENCES roles(roleid);
